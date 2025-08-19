@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>폼 태그 실습 — Naver GET 검색</title>
+</head>
+<body>
+
+  <!-- ****************************************************
+       <form>
+         - 입력 컨트롤을 묶어 서버로 데이터를 전송하는 컨테이너.
+         - 주요 속성: action(전송 URL), method(GET/POST), target(결과 표시 위치)
+
+       <input>
+         - 가장 기본적인 입력 요소.
+         - type 속성에 따라 text, search, radio, checkbox 등 다양한 형태로 동작.
+         - name 속성: 서버로 전송될 파라미터 이름.
+         - value 속성: 서버로 전송될 값.
+
+       <label>
+         - 특정 input과 연결해 클릭 영역을 확장, 접근성 강화.
+         - for 속성 값 = 연결할 input의 id 값.
+
+       <select>, <option>
+         - 드롭다운이나 다중 선택 목록을 제공.
+         - select의 name이 전송 파라미터, option의 value가 실제 값.
+
+       <textarea>
+         - 여러 줄 텍스트 입력을 위한 요소.
+         - rows, cols로 크기 지정. name 속성으로 값 전송.
+
+       <fieldset>, <legend>
+         - 관련 있는 입력 요소를 그룹화.
+         - legend는 그룹의 제목 역할.
+
+       <button>
+         - 기본은 type="submit" (폼 전송).
+         - type="reset": 입력 초기화.
+         - type="button": 스크립트 실행용, 전송 없음.
+     **************************************************** -->
+
+  <h1>네이버 검색 폼 실습</h1>
+
+  <!-- 1) 가장 단순한 텍스트 검색 -->
+  <h2>1) 텍스트 입력 + 제출</h2>
+  <form action="https://search.naver.com/search.naver" method="get" target="_blank">
+    <input type="hidden" name="where" value="nexearch">
+    <input type="hidden" name="sm" value="top_hty">
+
+    <label for="q1">검색어</label>
+    <input id="q1" name="query" type="text" placeholder="예: 자바" required>
+    <button type="submit">검색</button>
+  </form>
+
+  <hr>
+
+  <!-- 2) select/option -->
+  <h2>2) select로 query 값 선택</h2>
+  <form action="https://search.naver.com/search.naver" method="get" target="_blank">
+    <input type="hidden" name="where" value="nexearch">
+    <input type="hidden" name="sm" value="top_hty">
+
+    <label for="q2">검색어 선택</label>
+    <select id="q2" name="query">
+      <option value="자바">자바</option>
+      <option value="파이썬">파이썬</option>
+      <option value="스프링 부트">스프링 부트</option>
+      <option value="리액트">리액트</option>
+    </select>
+    <button type="submit">검색</button>
+  </form>
+
+  <hr>
+
+  <!-- 3) 라디오 -->
+  <h2>3) 라디오 버튼으로 query 선택</h2>
+  <form action="https://search.naver.com/search.naver" method="get" target="_blank">
+    <input type="hidden" name="where" value="nexearch">
+    <input type="hidden" name="sm" value="top_hty">
+
+    <fieldset>
+      <legend>언어 선택</legend>
+      <label><input type="radio" name="query" value="C언어" checked> C언어</label>
+      <label><input type="radio" name="query" value="JavaScript"> JavaScript</label>
+      <label><input type="radio" name="query" value="Kotlin"> Kotlin</label>
+    </fieldset>
+    <button type="submit">검색</button>
+  </form>
+
+  <hr>
+
+  <!-- 4) datalist -->
+  <h2>4) datalist 자동완성</h2>
+  <form action="https://search.naver.com/search.naver" method="get" target="_blank">
+    <input type="hidden" name="where" value="nexearch">
+    <input type="hidden" name="sm" value="top_hty">
+
+    <label for="q4">검색어 입력</label>
+    <input id="q4" name="query" list="keywords" placeholder="예: Spring Boot">
+    <datalist id="keywords">
+      <option value="HTML form">
+      <option value="CSS flexbox">
+      <option value="JavaScript fetch">
+      <option value="Spring Boot">
+      <option value="MySQL 8.0">
+    </datalist>
+    <button type="submit">검색</button>
+  </form>
+
+  <hr>
+
+  <!-- 5) textarea -->
+  <h2>5) textarea</h2>
+  <form action="https://search.naver.com/search.naver" method="get" target="_blank">
+    <input type="hidden" name="where" value="nexearch">
+    <input type="hidden" name="sm" value="top_hty">
+
+    <label for="q5">검색어 (자유 입력)</label><br>
+    <textarea id="q5" name="query" rows="3" cols="60">자바 튜토리얼</textarea>
+    <button type="submit">검색</button>
+  </form>
+
+  <hr>
+
+  <!-- 6) 네이버 상세검색 연산자 -->
+  <h2>6) 네이버 상세검색 연산자 (참고)</h2>
+  <ul>
+    <li><code>"단어 단어"</code> — 따옴표: 문구 전체를 정확히 포함</li>
+    <li><code>+단어</code> — 반드시 포함</li>
+    <li><code>-단어</code> — 반드시 제외</li>
+    <li><code>단어A | 단어B</code> — 둘 중 하나 포함 (OR)</li>
+  </ul>
+  <p>예시: <code>"JavaScript 튜토리얼" +React -Vue | Angular</code></p>
+  <p>※ 이 연산자들은 위 query 입력창 어디서든 직접 활용 가능.</p>
+
+</body>
+</html>
